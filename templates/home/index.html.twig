@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}E-Boutique{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <h1>Accueil</h1>
+
+    <a href="{{ path('app_login') }}">login</a>
+    <a href="{{ path('app_register') }}">register</a>
+
+    {# If is logged in #}
+    {% if app.user %}
+        <a href="{{ path('app_logout') }}">logout</a>
+    {% endif %}
+{% endblock %}
