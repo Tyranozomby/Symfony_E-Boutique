@@ -3,17 +3,7 @@
         <a class="navbar-brand" href="{{ path('app_home') }}">Book Store</a>
         <div class="navbar-collapse collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_home') }}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_books') }}">Book List</a>
-                </li>
             </ul>
-            {#            <form class="form-inline mt-2 mt-md-0" action="{{ path('app_books') }}" method="get"> #}
-            {#                <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search" aria-label="Search" value="{{ app.request.get("search") }}"> #}
-            {#                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> #}
-            {#            </form> #}
             <div class="d-inline-flex" style="gap: 1rem">
                 {# If is logged in #}
                 {% if app.user %}

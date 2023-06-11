@@ -20,32 +20,22 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class, [
-                'required' => true,
-            ])
+            ->add('email', EmailType::class)
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
-                'required' => true,
                 'constraints' => [
                     new IsTrue([
                         'message' => 'You should agree to our terms.',
                     ]),
                 ],
             ])
-            ->add('firstName', TelType::class, [
-                'required' => true,
-            ])
+            ->add('firstName', TelType::class)
             ->add('phone', null, [
                 'required' => false,
                 'attr' => [
                     'placeholder' => 'Optional',
                 ],
                 'constraints' => [
-                    new Length([
-                        'min' => 10,
-                        'minMessage' => 'Your phone number should be at least {{ limit }} characters',
-                        'max' => 10,
-                    ]),
                     new Regex([
                         'pattern' => '/^[0-9]{10}$/',
                         'message' => 'Your phone number should be 10 digits',
@@ -54,7 +44,6 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'required' => true,
                 'attr' => ['autocomplete' => 'new-password'],
                 'invalid_message' => "The passwords must match",
                 'first_options' => ['label' => 'Password'],

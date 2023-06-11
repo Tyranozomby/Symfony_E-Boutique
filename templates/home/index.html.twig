@@ -11,11 +11,21 @@
 
     <h1>Accueil</h1>
 
-    <a href="{{ path('app_login') }}">login</a>
-    <a href="{{ path('app_register') }}">register</a>
-
-    {# If is logged in #}
-    {% if app.user %}
-        <a href="{{ path('app_logout') }}">logout</a>
-    {% endif %}
+    <div class="row">
+        {% for category in categories %}
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>{{ category.name|capitalize }}</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>{{ category.description }}</p>
+                        <a href="{{ path('app_category_index') ~ '/' ~ category.name }}" class="btn btn-primary">
+                            Voir les produits ({{ category.products|length }})
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

@@ -2,17 +2,20 @@
 
 namespace App\Controller;
 
+use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BooksController extends AbstractController
 {
-    #[Route('/books', name: 'app_books')]
-    public function index(): Response
+    #[Route('/books/{id}', name: 'app_books')]
+    public function index(int $id, ProductRepository $productRepository): Response
     {
-        return $this->render('books/index.html.twig', [
-            'controller_name' => 'BooksController',
+        $book = $productRepository->findOneBy(['id' => $id]);
+
+        return $this->render('book/index.html.twig', [
+            'book' => $book,
         ]);
     }
 }

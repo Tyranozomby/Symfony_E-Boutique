@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ book.name }} - {{ book.description }}{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script defer src="{{ asset('js/book.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+
+    <div class="card">
+        <div class="card-header">
+            <h1>Name: {{ book.name }}</h1>
+            <h2>Description: {{ book.description }}</h2>
+            <h3>Category: {{ book.category.name|capitalize }}</h3>
+        </div>
+        <div class="card-body">
+            <p>${{ book.price }}</p>
+            <div class="row px-3">
+                {% for media in book.medias %}
+                    <img src="{{ asset('uploads/' ~ media.path) }}" alt="{{ media.alt }}" class="img-thumbnail w-25">
+                {% endfor %}
+            </div>
+        </div>
+        <div class="card-footer">
+            <form id="cart-add" data-id="{{ book.id }}">
+                <label for="quantity">Quantity</label>
+                <input type="number" name="quantity" id="quantity" min="1" max="{{ book.stock + 1 }}" value="1">
+                <span id="price">${{ book.price }}</span>
+                <input type="hidden" name="id" value="{{ book.id }}">
+                <input type="hidden" name="price" value="{{ book.price }}">
+                <input type="hidden" name="name" value="{{ book.name }}">
+                <input type="submit" value="Add to cart">
+            </form>
+            <form id="cart-remove">
+                <input type="hidden" name="id" value="{{ book.id }}">
+                <input type="submit" value="Remove from cart">
+            </form>
+        </div>
+    </div>
+{% endblock %}

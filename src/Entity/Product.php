@@ -6,6 +6,7 @@ use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
@@ -15,16 +16,18 @@ class Product
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Assert\Range(min: 0)]
     private ?float $price = null;
 
     #[ORM\Column]
+    #[Assert\Range(min: 0)]
     private ?int $stock = null;
 
     #[ORM\Column]
@@ -181,5 +184,11 @@ class Product
         }
 
         return $this;
+    }
+
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 }

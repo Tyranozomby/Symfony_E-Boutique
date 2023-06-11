@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ShoppingListController extends AbstractController
 {
-    #[Route('/shopping_list', name: 'app_shopping_list')]
+    #[Route('/profile', name: 'app_shopping_list')]
     public function index(): Response
     {
         return $this->render('shopping_list/index.html.twig', [
